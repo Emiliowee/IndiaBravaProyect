@@ -1,0 +1,35 @@
+<div class="modal fade" id="reporteModal" tabindex="-1" aria-labelledby="reporteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-white p-8 rounded-lg shadow-lg w-96">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-semibold text-gray-800" id="reporteModalLabel">Reporte de Inventario</h2>
+                <button type="button" class="text-gray-500 hover:text-gray-700" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="reporteForm">
+                <div class="mb-6">
+                    <label for="fechaInicial" class="block text-sm font-medium text-gray-700 mb-2">Fecha Inicial</label>
+                    <div class="relative">
+                        <input type="text" class="datepicker w-full border border-gray-300 rounded-lg p-3 pl-4 pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" id="fechaInicial" name="fechaInicial" placeholder="dd/mm/aaaa" required>
+                        <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+                            <i class="fas fa-calendar-alt text-gray-400"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <label for="fechaFinal" class="block text-sm font-medium text-gray-700 mb-2">Fecha Final</label>
+                    <div class="relative">
+                        <input type="text" class="datepicker w-full border border-gray-300 rounded-lg p-3 pl-4 pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" id="fechaFinal" name="fechaFinal" placeholder="dd/mm/aaaa" required>
+                        <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+                            <i class="fas fa-calendar-alt text-gray-400"></i>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="w-full bg-[#9ecb25] text-white font-semibold py-3 rounded-lg hover:bg-[#8ab421] transition-colors duration-200" onclick="enviarReporte()">
+                    <i class="fas fa-file-alt mr-2"></i> Generar Reporte
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

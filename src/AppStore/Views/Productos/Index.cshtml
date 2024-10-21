@@ -1,0 +1,84 @@
+@model IEnumerable<Producto>
+
+<div class="container">
+    <div class="header">
+        <h2>Análisis general:</h2>
+        <div class="d-flex align-items-center">
+            <button onclick="mostrarModalNuevoProducto()" class="me-2">
+                <i class="fas fa-plus"></i> Agregar Producto
+            </button>
+            <button id="optionsButton" class="btn btn-sm">
+                <i class="fas fa-ellipsis-v"></i>
+            </button>
+            <div class="dropdown-menu" id="optionsMenu" style="display: none;">
+                <a href="#" onclick="mostrarModalAgregarStock()">Añadir al Stock</a>
+                <a href="#" onclick="generarReporte()">Generar reporte</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="stats">
+        <div class="stat">
+            <i class="fas fa-box"></i>
+            <h3>Total de Productos:</h3>
+            <p>@Model.Count()</p>
+            <div class="progress"></div>
+        </div>
+        <div class="stat">
+            <i class="fas fa-dollar-sign"></i>
+            <h3>Valor del Inventario:</h3>
+            <p>$@Model.Sum(p => p.Precio * p.Stock).ToString("N2")</p>
+            <div class="progress"></div>
+        </div>
+        <div class="stat">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h3>Productos con Stock Bajo:</h3>
+            <p id="productosStockBajo">@Model.Count(p => p.Stock < 10)</p>
+            <div class="progress"></div>
+        </div>
+    </div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>ContNeto</th>
+                    <th>Unidad Medida</th>
+                    <th>Stock</th>
+                    <th>Imágenes</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var producto in Model)
+                {
+                    <tr>
+                        <td>@producto.IDProducto</td>
+                        <td>@producto.Nombre</td>
+                        <td>$@producto.Precio.ToString("N2")</td>
+                        <td>@producto.ContenidoNeto</td>
+                        <td>@producto.UnidadMedida</td>
+                        <td>@producto.Stock</td>
+                        <td><img src="@producto.Imagen" alt="Imagen del producto" style="width: 50px; height: 50px;"></td>
+                        <td class="actions">
+                            <i class="fas fa-edit edit" onclick="editarProducto(@producto.IDProducto)"></i>
+                            <i class="fas fa-trash delete" onclick="confirmarEliminarProducto(@producto.IDProducto)"></i>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@await Html.PartialAsync("_ModalNuevoProducto")
+@await Html.PartialAsync("_ModalEditarProducto")
+@await Html.PartialAsync("_ModalAgregarStock")
+@await Html.PartialAsync("_ModalGenerarReporte")
+
+@section Scripts {
+    <script src="~/js/productos.js"></script>
+}
